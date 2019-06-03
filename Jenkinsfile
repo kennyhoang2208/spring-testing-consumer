@@ -24,10 +24,16 @@ pipeline {
 
           // Build the main service
           sh "gradle clean build"
+
+          // Override the env variables
+          sh "export APP_NAME='spring-testing-consumer'"
+          sh "PREVIEW_VERSION='0.0.0-SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER'"
+          sh "PREVIEW_NAMESPACE='$APP_NAME-$BRANCH_NAME'"
+          sh "HELM_RELEASE='$PREVIEW_NAMESPACE'"
+
           sh "export VERSION=$PREVIEW_VERSION && skaffold build -f skaffold.yaml"
           sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:$PREVIEW_VERSION"
           dir('./charts/preview') {
-            sh "export APP_NAME='spring-testing-consumer'"
             sh "make preview"
             sh "jx preview --app $APP_NAME --dir ../.."
           }
