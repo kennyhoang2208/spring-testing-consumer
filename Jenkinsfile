@@ -22,6 +22,7 @@ pipeline {
           // Build and deploy dependency services
           sh "sh ./deploy_dependency_services.sh"
 
+          // Build the main service
           sh "gradle clean build"
           sh "export VERSION=$PREVIEW_VERSION && skaffold build -f skaffold.yaml"
           sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:$PREVIEW_VERSION"
