@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 # The list of known dependency service names.
 export SERVICES=(
@@ -18,7 +19,10 @@ for service in "${SERVICES[@]}"; do
   echo "Deploying service: ---${service}---"
   echo "-----------------------------------"
   cd ${PROJ_PARENT}
-  git clone ${GIT_PROVIDER_URL}/${ORG}/${service}.git ${service}
+  service_repo="${GIT_PROVIDER_URL}/${ORG}/${service}.git"
+
+  echo "Cloning ...: ${service_repo}"
+  git clone ${service_repo} ${service}
 
   # Build and deploy in to the preview environment
   cd ${PROJ_PARENT}/${service}
@@ -42,3 +46,5 @@ for service in "${SERVICES[@]}"; do
 done
 
 cd ${PROJ_HOME}
+
+exit 0
