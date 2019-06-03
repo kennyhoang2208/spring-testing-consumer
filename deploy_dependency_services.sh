@@ -21,6 +21,7 @@ for service in "${SERVICES[@]}"; do
   git clone ${GIT_PROVIDER_URL}/${ORG}/${service}.git ${service}
 
   # Build and deploy in to the preview environment
+  cd ${PROJ_PARENT}/${service}
   gradle clean build
   export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml
   jx step post build --image ${DOCKER_REGISTRY}/${ORG}/${service}:$(cat VERSION)
