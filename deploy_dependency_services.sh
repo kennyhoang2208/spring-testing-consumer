@@ -22,7 +22,7 @@ for service in "${SERVICES[@]}"; do
 
   # Build and deploy in to the preview environment
   cd ${PROJ_PARENT}/${service}
-  sh "echo $(jx-release-version) > VERSION"
+  echo $(jx-release-version) > VERSION
   gradle clean build
   export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml
   jx step post build --image ${DOCKER_REGISTRY}/${ORG}/${service}:$(cat VERSION)
