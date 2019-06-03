@@ -33,8 +33,8 @@ for service in "${SERVICES[@]}"; do
 
   # Config for service preview naming.
   export PREVIEW_VERSION=$VERSION
-  export PREVIEW_NAMESPACE = "${service}-${BRANCH_NAME}"
-  export HELM_RELEASE = $PREVIEW_NAMESPACE
+  export PREVIEW_NAMESPACE="${service}-${BRANCH_NAME}"
+  export HELM_RELEASE=$PREVIEW_NAMESPACE
 
   # Make preview
   service_home=${PROJ_PARENT}/${service}/
