@@ -29,8 +29,8 @@ for service in "${SERVICES[@]}"; do
 
   service_home=${PROJ_PARENT}/${service}/
   cd "${service_home}/charts/preview"
-  sh "make preview"
-  sh "jx preview --app ${service} --dir ../.."
+  make preview
+  jx preview --app ${service} --dir ../..
 
   echo "-----------------------------------"
 done
