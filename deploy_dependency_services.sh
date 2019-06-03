@@ -27,6 +27,12 @@ for service in "${SERVICES[@]}"; do
   export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml
   jx step post build --image ${DOCKER_REGISTRY}/${ORG}/${service}:$(cat VERSION)
 
+  # Config for service preview naming.
+  export PREVIEW_VERSION=$VERSION
+  export PREVIEW_NAMESPACE = "$service-$BRANCH_NAME".toLowerCase()
+  export HELM_RELEASE = "$PREVIEW_NAMESPACE".toLowerCase()
+
+  # Make preview
   service_home=${PROJ_PARENT}/${service}/
   cd "${service_home}/charts/preview"
   make preview
