@@ -34,3 +34,5 @@ for service in "${SERVICES[@]}"; do
 
   echo "-----------------------------------"
 done
+
+cd ${PROJ_HOME}
