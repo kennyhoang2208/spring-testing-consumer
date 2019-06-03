@@ -36,6 +36,9 @@ for service in "${SERVICES[@]}"; do
   export PREVIEW_NAMESPACE="${service}-${BRANCH_NAME}"
   export HELM_RELEASE=$PREVIEW_NAMESPACE
 
+  # Override app name
+  export APP_NAME=$service
+
   # Make preview
   service_home=${PROJ_PARENT}/${service}/
   cd "${service_home}/charts/preview"
