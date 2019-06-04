@@ -20,16 +20,16 @@ pipeline {
       steps {
         container('gradle') {
           // Build and deploy dependency services
-          sh "sh ./deploy_dependency_services.sh"
+          // sh "sh ./deploy_dependency_services.sh"
 
           // Build the main service
           sh "gradle clean build"
 
           // Override the env variables
-          sh "export APP_NAME='spring-testing-consumer'"
-          sh "PREVIEW_VERSION='0.0.0-SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER'"
-          sh "PREVIEW_NAMESPACE='$APP_NAME-$BRANCH_NAME'"
-          sh "HELM_RELEASE='$PREVIEW_NAMESPACE'"
+          // sh "export APP_NAME='spring-testing-consumer'"
+          // sh "PREVIEW_VERSION='0.0.0-SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER'"
+          // sh "PREVIEW_NAMESPACE='$APP_NAME-$BRANCH_NAME'"
+          // sh "HELM_RELEASE='$PREVIEW_NAMESPACE'"
 
           sh "export VERSION=$PREVIEW_VERSION && skaffold build -f skaffold.yaml"
           sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:$PREVIEW_VERSION"
