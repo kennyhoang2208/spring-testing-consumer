@@ -43,7 +43,7 @@ for service in "${SERVICES[@]}"; do
   service_home=${PROJ_PARENT}/${service}/
   cd "${service_home}/charts/preview"
   make preview
-  jx preview --release ${service} --app ${service} --dir ../..
+  jx preview --release "${service}-preview" --app ${service} --dir ../..
 
   echo "-----------------------------------"
 done
