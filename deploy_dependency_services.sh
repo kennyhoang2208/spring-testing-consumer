@@ -39,11 +39,14 @@ for service in "${SERVICES[@]}"; do
   # Override app name
   export APP_NAME=$service
 
+  # Release
+  jx step helm release
+
   # Make preview
-  service_home=${PROJ_PARENT}/${service}/
-  cd "${service_home}/charts/preview"
-  make preview
-  jx preview --release "${service}-preview" --app ${service} --dir ../..
+  # service_home=${PROJ_PARENT}/${service}/
+  # cd "${service_home}/charts/preview"
+  # make preview
+  # jx preview --release "${service}-preview" --app ${service} --dir ../..
 
   echo "-----------------------------------"
 done
