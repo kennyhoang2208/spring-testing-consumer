@@ -30,8 +30,6 @@ dependencies {
         exclude module: 'spring-boot-starter-tomcat'
     }
     compile("org.springframework.boot:spring-boot-starter-jetty")
-    compile("org.springframework.cloud:spring-cloud-starter-kubernetes")
-    compile("org.springframework.cloud:spring-cloud-starter-kubernetes-ribbon")
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('com.h2database:h2')
