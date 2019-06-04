@@ -40,12 +40,12 @@ for service in "${SERVICES[@]}"; do
   export APP_NAME=$service
 
   # Release
+  service_home=${PROJ_PARENT}/${service}/
+  cd "${service_home}/charts/${service}"
   jx step helm release
 
   # Make preview
-  # service_home=${PROJ_PARENT}/${service}/
   # cd "${service_home}/charts/preview"
-  # make preview
   # jx preview --release "${service}-preview" --app ${service} --dir ../..
 
   echo "-----------------------------------"
