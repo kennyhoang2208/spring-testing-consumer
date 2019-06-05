@@ -13,7 +13,7 @@ public class AppConfig {
     @Bean
     WeatherServiceClient weatherServiceClient(
             RestTemplate restTemplate,
-            @Value("${backend.helloworld-service.url}") String endpoint) {
+            @Value("${backend.weather-service.url}") String endpoint) {
         return new WeatherServiceClient(restTemplate, endpoint);
     }
 
