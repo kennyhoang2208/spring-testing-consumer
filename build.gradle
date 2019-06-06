@@ -23,6 +23,18 @@ repositories {
     mavenCentral()
 }
 
+test {
+    useJUnit {
+        exclude '**/*IntegrationTests.class'
+    }
+}
+
+task integrationTest(type: Test) {
+    useJUnit {
+        include '**/*IntegrationTests.class'
+    }
+}
+
 dependencies {
     compile('org.springframework.boot:spring-boot-starter')
     compile('org.springframework.boot:spring-boot-starter-actuator')
