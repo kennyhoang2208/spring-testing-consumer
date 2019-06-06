@@ -27,7 +27,7 @@ public class WeatherController {
         return "Hello World from Spring Testing Consumer!!";
     }
 
-    @GetMapping("/api/weather")
+    @GetMapping("/weather")
     public Map<String, String> fetchWeather() {
         return weatherServiceClient.getWeather();
     }
