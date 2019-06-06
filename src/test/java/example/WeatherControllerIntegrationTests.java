@@ -1,6 +1,6 @@
 package example;
 
-import org.junit.After;
+import example.ExampleConsumerApplication;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,7 +34,7 @@ public class WeatherControllerIntegrationTests {
 
     @Test
     public void fetchWeather() throws Exception {
-        mockMvc.perform(get("/weather").accept(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(get("/api/weather").accept(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
