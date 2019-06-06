@@ -37,6 +37,9 @@ pipeline {
             sh "make preview"
             sh "jx preview --app $APP_NAME --dir ../.."
           }
+
+          // Run integration tests
+          sh "gradle integrationTest"
         }
       }
     }
