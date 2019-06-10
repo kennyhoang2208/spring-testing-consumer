@@ -4,6 +4,8 @@ server:
 backend:
   weather-service:
     url: http://spring-testing/weather
+  hello-service:
+    url: http://spring-testing/hello
 
 spring:
   application.name: spring-testing-consumer

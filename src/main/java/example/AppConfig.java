@@ -30,4 +30,12 @@ public class AppConfig {
         return new WeatherServiceClient(restTemplate, endpoint);
     }
 
+    @Bean
+    @LoadBalanced
+    HelloServiceClient helloServiceClient(
+            RestTemplate restTemplate,
+            @Value("${backend.hello-service.url}") String endpoint) {
+        return new HelloServiceClient(restTemplate, endpoint);
+    }
+
 }
