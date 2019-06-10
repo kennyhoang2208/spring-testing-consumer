@@ -1,6 +1,5 @@
 package example;
 
-import example.ExampleConsumerApplication;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

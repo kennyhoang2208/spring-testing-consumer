@@ -3,8 +3,6 @@ package example;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Map;
-
 public class WeatherServiceClient {
 
     private RestTemplate restTemplate;
@@ -18,8 +16,7 @@ public class WeatherServiceClient {
 
     public String getWeather() {
         try {
-            Object result = restTemplate.getForObject(endpoint, Map.class);
-            return result == null ? "null" : result.toString();
+            return restTemplate.getForObject(endpoint, String.class);
         } catch (HttpStatusCodeException e) {
             return "Unable to connect";
         }

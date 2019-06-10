@@ -23,10 +23,6 @@ pipeline {
           sh "sh ./deploy_dependency_services.sh"
 
           // Sleep for 2 mins
-          sh "echo 'Sleeping for 2 minutes' && sleep 2m"
-        }
-        container('gradle') {
-          // Sleep for 2 mins
           sh "echo 'Sleeping for 2 minutes'"
           sh "sleep 2m"
 
@@ -45,8 +41,7 @@ pipeline {
             sh "make preview"
             sh "jx preview --app $APP_NAME --dir ../.."
           }
-        }
-        container('gradle') {
+
           // Run integration tests
           // Sleep for 2 mins
           sh "echo 'Sleeping for 2 minutes' && sleep 2m"
