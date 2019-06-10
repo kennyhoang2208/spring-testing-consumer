@@ -24,6 +24,11 @@ pipeline {
 
           // Sleep for 2 mins
           sh "echo 'Sleeping for 2 minutes' && sleep 2m"
+        }
+        container('gradle') {
+          // Sleep for 2 mins
+          sh "echo 'Sleeping for 2 minutes'"
+          sh "sleep 2m"
 
           // Build the main service
           sh "gradle clean build"
@@ -40,12 +45,17 @@ pipeline {
             sh "make preview"
             sh "jx preview --app $APP_NAME --dir ../.."
           }
-
+        }
+        container('gradle') {
           // Run integration tests
+          // Sleep for 2 mins
+          sh "echo 'Sleeping for 2 minutes' && sleep 2m"
           sh "gradle integrationTest"
         }
       }
     }
+
+
     stage('Build Release') {
       when {
         branch 'master'
