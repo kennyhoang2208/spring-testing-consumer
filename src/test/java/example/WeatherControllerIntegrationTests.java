@@ -36,4 +36,11 @@ public class WeatherControllerIntegrationTests {
                 .andDo(print())
                 .andExpect(status().isOk());
     }
+
+    @Test
+    public void fetchHello() throws Exception {
+        mockMvc.perform(get("/api/hello").accept(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
 }

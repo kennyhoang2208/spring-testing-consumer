@@ -14,15 +14,18 @@ public class WeatherController {
 
     private WeatherServiceClient weatherServiceClient;
 
+    private HelloServiceClient helloServiceClient;
+
     @Autowired
-    public WeatherController(WeatherServiceClient weatherServiceClient) {
-        logger.debug("Testing");
+    public WeatherController(WeatherServiceClient weatherServiceClient, HelloServiceClient helloServiceClient) {
+        this.helloServiceClient = helloServiceClient;
         this.weatherServiceClient = weatherServiceClient;
     }
 
     @GetMapping("/hello")
     public String hello() {
-        return "Hello World from Spring Testing Consumer!!";
+        logger.debug("Hello World from Spring Testing Consumer!!");
+        return helloServiceClient.getHello();
     }
 
     @GetMapping("/weather")
