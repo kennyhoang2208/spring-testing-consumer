@@ -3,7 +3,6 @@ package example;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class WeatherServiceClient {
@@ -17,17 +16,12 @@ public class WeatherServiceClient {
         this.endpoint = endpoint;
     }
 
-    Map<String, String> greetingFallback() {
-        Map<String, String> response = new HashMap<>();
-        response.put("weather", "Unable to connect");
-        return response;
-    }
-
-    public Map<String, String> getWeather() {
+    public String getWeather() {
         try {
-            return restTemplate.getForObject(endpoint, Map.class);
+            Object result = restTemplate.getForObject(endpoint, Map.class);
+            return result == null ? "null" : result.toString();
         } catch (HttpStatusCodeException e) {
-            return greetingFallback();
+            return "Unable to connect";
         }
     }
 }
