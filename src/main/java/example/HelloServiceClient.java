@@ -3,18 +3,17 @@ package example;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
-public class WeatherServiceClient {
+public class HelloServiceClient {
 
     private RestTemplate restTemplate;
     private String endpoint;
 
-    public WeatherServiceClient(RestTemplate restTemplate, String endpoint) {
-
+    public HelloServiceClient(RestTemplate restTemplate, String endpoint) {
         this.restTemplate = restTemplate;
         this.endpoint = endpoint;
     }
 
-    public String getWeather() {
+    public String getHello() {
         try {
             return restTemplate.getForObject(endpoint, String.class);
         } catch (HttpStatusCodeException e) {

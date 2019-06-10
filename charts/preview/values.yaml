@@ -15,7 +15,8 @@ cleanup:
     helm.sh/hook: pre-delete
     helm.sh/hook-delete-policy: hook-succeeded
 
-spring-testing-consumer-preview:
+spring-testing-consumer:
+  replicaCount: 1
   image:
     repository:
     tag:
