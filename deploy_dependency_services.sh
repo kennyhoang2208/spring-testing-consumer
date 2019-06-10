@@ -40,14 +40,14 @@ for service in "${SERVICES[@]}"; do
   export APP_NAME=$service
 
   # Change db config
-  echo "db host ==== ${DB_HOST}"
-  export DB_HOST="${service}-${DB_HOST}"
+#  echo "db host ==== ${DB_HOST}"
+#  export DB_HOST="${service}-${DB_HOST}"
 
   # Make preview
   service_home=${PROJ_PARENT}/${service}/
   cd "${service_home}/charts/preview"
   make preview
-  jx preview --release "${service}-preview" --app ${service} --dir ../..
+  jx preview --release "preview" --app ${service} --dir ../..
 
   echo "-----------------------------------"
 done
