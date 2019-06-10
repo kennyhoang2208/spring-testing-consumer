@@ -1,0 +1,23 @@
+server:
+  contextPath: /
+
+backend:
+  weather-service:
+    url: http://spring-testing/weather
+
+spring:
+  application.name: spring-testing-consumer
+  cloud.kubernetes.reload.enabled: true
+server.port: 8080
+management:
+  endpoint:
+    restart:
+      enabled: true
+    health:
+      enabled: true
+    info:
+      enabled: true
+ribbon:
+  http:
+    client:
+      enabled: true
