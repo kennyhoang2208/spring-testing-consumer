@@ -22,6 +22,9 @@ pipeline {
           // Build and deploy dependency services
           sh "sh ./deploy_dependency_services.sh"
 
+          // Sleep for 2 mins
+          sh "echo 'Sleeping for 2 minutes' && sleep 2m"
+
           // Build the main service
           sh "gradle clean build"
 
