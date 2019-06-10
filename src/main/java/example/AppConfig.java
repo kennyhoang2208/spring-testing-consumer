@@ -1,6 +1,7 @@
 package example;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -13,6 +14,7 @@ public class AppConfig {
     }
 
     @Bean
+    @LoadBalanced
     WeatherServiceClient weatherServiceClient(
             RestTemplate restTemplate,
             @Value("${backend.weather-service.url}") String endpoint) {
