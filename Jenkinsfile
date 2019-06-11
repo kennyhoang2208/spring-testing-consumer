@@ -67,17 +67,17 @@ pipeline {
       }
     }
 
-    stage('Run BDD tests') {
-      when {
-        branch 'PR-*'
-      }
-      steps {
-        container('gradle') {
-          // Run BDD tests
-          sh "echo 'TODO'"
-        }
-      }
-    }
+    // stage('Run BDD tests') {
+    //   when {
+    //     branch 'PR-*'
+    //   }
+    //   steps {
+    //     container('gradle') {
+    //       // Run BDD tests
+    //       sh "echo 'TODO'"
+    //     }
+    //   }
+    // }
 
     stage('Build Release') {
       when {
