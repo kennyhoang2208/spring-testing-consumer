@@ -24,7 +24,7 @@ public class WeatherController {
 
     @GetMapping("/hello")
     public String hello() {
-        logger.debug("Hello World from Spring Testing Consumer!!");
+        logger.debug("Hello World from Spring Testing Consumer - hello!!");
         return helloServiceClient.getHello();
     }
 
