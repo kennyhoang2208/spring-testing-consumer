@@ -8,6 +8,19 @@ pipeline {
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
   }
   stages {
+    // Run unit test
+    stage('Run unit tests') {
+      when {
+        branch 'PR-*'
+      }
+      steps {
+        container('gradle') {
+          // Run unit tests for the main service
+          sh "gradle clean test"
+        }
+      }
+    }
+
     stage('Deploy dependency services') {
       when {
         branch 'PR-*'
@@ -29,7 +42,7 @@ pipeline {
       }
     }
 
-    stage('Run integration tests') {
+    stage('Run Integration Unit Tests') {
       when {
         branch 'PR-*'
       }
