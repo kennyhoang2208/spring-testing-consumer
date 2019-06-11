@@ -2,7 +2,7 @@
 set -e
 
 # The list of known dependency service names.
-export SERVICES=(
+export DEPENDENCY_SERVICES=(
   "spring-testing"
 )
 
@@ -14,7 +14,7 @@ export GIT_PROVIDER_URL="https://github.com"
 export PROJ_HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 export PROJ_PARENT="$( cd ${PROJ_HOME}/.. && pwd )"
 
-for service in "${SERVICES[@]}"; do
+for service in "${DEPENDENCY_SERVICES[@]}"; do
   # Clone the service source code
   echo "Deploying service: ---${service}---"
   echo "-----------------------------------"
@@ -44,9 +44,7 @@ for service in "${SERVICES[@]}"; do
   cd "${service_home}/charts/preview"
   make preview
 
-  # Change db config
-#  echo "db host ==== ${DB_HOST}"
-#  export DB_HOST="${service}-${DB_HOST}"
+  # Deploy preview
   jx preview --release "${service}-preview" --app ${service} --dir ../..
 
   echo "-----------------------------------"
