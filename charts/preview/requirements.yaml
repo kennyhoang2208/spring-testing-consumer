@@ -12,7 +12,7 @@ dependencies:
 - alias: spring-testing-preview
   name: spring-testing
   repository: http://jenkins-x-chartmuseum:8080
-  version: latest
+  version: 0.0.40
 
   # !! "alias: preview" must be last entry in dependencies array !!
   # !! Place custom dependencies above !!
