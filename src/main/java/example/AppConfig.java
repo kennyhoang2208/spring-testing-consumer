@@ -16,8 +16,8 @@ public class AppConfig {
     RestTemplate restTemplate() {
 
         SimpleClientHttpRequestFactory clientHttpRequestFactory = new SimpleClientHttpRequestFactory();
-        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("35.245.56.57", 80));
-        clientHttpRequestFactory.setProxy(proxy);
+        // Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("35.245.56.57", 80));
+        // clientHttpRequestFactory.setProxy(proxy);
 
         return new RestTemplate(clientHttpRequestFactory);
     }
