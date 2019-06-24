@@ -52,8 +52,7 @@ pipeline {
       steps {
         container('gradle') {
           // Run integration tests
-          // Sleep for 2 mins
-          sh "echo 'Sleeping for 2 minutes' && sleep 2m"
+          // sh "echo 'Sleeping for 2 minutes' && sleep 2m"
           sh "gradle integrationTest"
         }
       }
