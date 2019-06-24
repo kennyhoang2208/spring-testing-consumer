@@ -19,19 +19,20 @@ for service in "${DEPENDENCY_SERVICES[@]}"; do
   echo "Deploying service: ---${service}---"
   echo "-----------------------------------"
   cd ${PROJ_PARENT}
-  # service_repo="${GIT_PROVIDER_URL}/${ORG}/${service}.git"
+  service_repo="${GIT_PROVIDER_URL}/${ORG}/${service}.git"
 
-  echo "Make dir ...: ${service}"
-  mkdir ${service}
+  echo "Cloning ...: ${service_repo}"
+  git clone ${service_repo} ${service}
 
   # Build and deploy in to the preview environment
   cd ${PROJ_PARENT}/${service}
 
-  # Using the latest version
-  echo 'latest' > VERSION
+  # How about using the latest version ???
+  echo $(jx-release-version -same-release) > VERSION
 
   # gradle clean build
-  export VERSION=`cat VERSION`
+  export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml
+  # jx step post build --image ${DOCKER_REGISTRY}/${ORG}/${service}:$(cat VERSION)
 
   # Config for service preview naming.
   export PREVIEW_VERSION=$VERSION
@@ -42,7 +43,9 @@ for service in "${DEPENDENCY_SERVICES[@]}"; do
   export APP_NAME=$service
 
   # Make preview
-  # Download the latest chart
+  service_home=${PROJ_PARENT}/${service}/
+  cd "${service_home}/charts/preview"
+  make preview
 
   # Deploy preview
   jx preview --release "${service}-preview" --app ${service} --dir ../..
