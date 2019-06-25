@@ -1,4 +1,5 @@
 OS := $(shell uname)
+CHART_REPOSITORY := http://jenkins-x-chartmuseum:8080
 
 preview: 
 ifeq ($(OS),Darwin)

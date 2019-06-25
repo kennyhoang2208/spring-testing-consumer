@@ -21,41 +21,6 @@ pipeline {
       }
     }
 
-    stage('Deploy dependency services') {
-      when {
-        branch 'PR-*'
-      }
-      environment {
-        PREVIEW_VERSION = "0.0.0-SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER"
-        PREVIEW_NAMESPACE = "$APP_NAME-$BRANCH_NAME".toLowerCase()
-        HELM_RELEASE = "$PREVIEW_NAMESPACE".toLowerCase()
-      }
-      steps {
-        container('gradle') {
-          // Build and deploy dependency services
-          sh "sh ./deploy_dependency_services.sh"
-
-          // Sleep for 2 mins
-          sh "echo 'Sleeping for 2 minutes'"
-          sh "sleep 2m"
-        }
-      }
-    }
-
-    stage('Run Integration Unit Tests') {
-      when {
-        branch 'PR-*'
-      }
-      steps {
-        container('gradle') {
-          // Run integration tests
-          // Sleep for 2 mins
-          sh "echo 'Sleeping for 2 minutes' && sleep 2m"
-          sh "gradle integrationTest"
-        }
-      }
-    }
-
     stage('CI Build and push snapshot') {
       when {
         branch 'PR-*'
@@ -67,8 +32,8 @@ pipeline {
       }
       steps {
         container('gradle') {
-          // Build the main service
-          sh "gradle clean build"
+          // Build the main service, exclude the test since it has been already run.
+          sh "gradle clean build --exclude-task test"
 
           sh "export VERSION=$PREVIEW_VERSION && skaffold build -f skaffold.yaml"
           sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:$PREVIEW_VERSION"
@@ -76,6 +41,19 @@ pipeline {
             sh "make preview"
             sh "jx preview --app $APP_NAME --dir ../.."
           }
+        }
+      }
+    }
+
+    stage('Run Integration Unit Tests') {
+      when {
+        branch 'PR-*'
+      }
+      steps {
+        container('gradle') {
+          // Run integration tests
+          // sh "echo 'Sleeping for 2 minutes' && sleep 2m"
+          sh "gradle integrationTest"
         }
       }
     }

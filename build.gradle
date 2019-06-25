@@ -3,7 +3,7 @@ buildscript {
         springBootVersion = '2.1.0.RELEASE'
     }
     repositories {
-        // TODO:: Config this one
+        // TODO:: Config this one for caching
         mavenCentral()
     }
     dependencies {
